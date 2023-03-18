@@ -1,3 +1,9 @@
+<script lang="ts">
+	import type { Data } from'$lib/types';
+	export let data: Data;
+
+	
+</script>
 <h1>Welcome to SvelteKit</h1>
 <p class="font-gotham ">
 	Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation
