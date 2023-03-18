@@ -2,58 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 @font-face {
-  font-family: 'GothamRndSSm-Bold';
-  src: url(./fonts/GothamRndSSm-Bold.otf);
-  font-weight: bold;
-  font-style: normal;
+	font-family: 'GothamRndSSm-Bold';
+	src: url(./fonts/GothamRndSSm-Bold.otf);
+	font-weight: bold;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'GothamRndSSm-Bolditalic';
-  src: url(./fonts/GothamRndSSm-Bolditalic.otf);
-  font-weight: bold;
-  font-style: italic;
+	font-family: 'GothamRndSSm-Bolditalic';
+	src: url(./fonts/GothamRndSSm-Bolditalic.otf);
+	font-weight: bold;
+	font-style: italic;
 }
 
 @font-face {
-  font-family: 'GothamRndSSm-Book';
-  src: url(./fonts/GothamRndSSm-Book.otf);
-  font-weight: normal;
-  font-style: normal;
+	font-family: 'GothamRndSSm-Book';
+	src: url(./fonts/GothamRndSSm-Book.otf);
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'GothamRndSSm-Bookitalic';
-  src: url(./fonts/GothamRndSSm-Bookitalic.otf);
-  font-weight: normal;
-  font-style: italic;
+	font-family: 'GothamRndSSm-Bookitalic';
+	src: url(./fonts/GothamRndSSm-Bookitalic.otf);
+	font-weight: normal;
+	font-style: italic;
 }
 
 @font-face {
-  font-family: 'GothamRndSSm-Medium';
-  src: url(./fonts/GothamRndSSm-Medium.otf);
-  font-weight: 500;
-  font-style: normal;
+	font-family: 'GothamRndSSm-Medium';
+	src: url(./fonts/GothamRndSSm-Medium.otf);
+	font-weight: 500;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'GothamRndSSm-Mediumitalic';
-  src: url(./fonts/GothamRndSSm-Mediumitalic.otf);
-  font-weight: 500;
-  font-style: italic;
+	font-family: 'GothamRndSSm-Mediumitalic';
+	src: url(./fonts/GothamRndSSm-Mediumitalic.otf);
+	font-weight: 500;
+	font-style: italic;
 }
 
 @font-face {
-  font-family: 'GothamRndSSm-Light';
-  src: url(./fonts/GothamRndSSm-Light.otf);
-  font-weight: 300;
-  font-style: normal;
+	font-family: 'GothamRndSSm-Light';
+	src: url(./fonts/GothamRndSSm-Light.otf);
+	font-weight: 300;
+	font-style: normal;
 }
 
 @font-face {
-  font-family: 'GothamRndSSm-Lightitalic';
-  src: url(./fonts/GothamRndSSm-Lightitalic.otf);
-  font-weight: 300;
-  font-style: italic;
+	font-family: 'GothamRndSSm-Lightitalic';
+	src: url(./fonts/GothamRndSSm-Lightitalic.otf);
+	font-weight: 300;
+	font-style: italic;
 }
-
