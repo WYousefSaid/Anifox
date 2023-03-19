@@ -2,7 +2,7 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Data } from'$lib/types';
 import { redis } from '$lib/server/redis';
-import { error } from '@sveltejs/kit';
+
 
 export const GET: RequestHandler = async ({url,fetch,setHeaders}) => {
   try {

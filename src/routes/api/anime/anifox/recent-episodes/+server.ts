@@ -9,7 +9,7 @@ export const GET: RequestHandler = async ({url,fetch,setHeaders}) => {
     const page = url.searchParams.get('page') || '1';
     const cached = await redis.get('recent');
     if (cached) {
-      console.log('Cached data found for trending anime');
+      console.log('Cached data found for recent episodes anime');
       const ttl = await redis.ttl('recent'); 
       setHeaders({"cache-control": `max=age=${ttl}`});
       return json(JSON.parse(cached) as Data);
@@ -17,7 +17,6 @@ export const GET: RequestHandler = async ({url,fetch,setHeaders}) => {
     else{
     console.log('Cached data not found for recent episodes');
 
-    console.log('Cached data not found for trending anime');
     const response = await fetch(`https://api.consumet.org/meta/anilist/recent-episodes?page=${page}&provider=zoro`);
     const data = await response.json();
     redis.set('recent', JSON.stringify(data.results), 'EX', 60 * 60 * 24); // 1 day cache

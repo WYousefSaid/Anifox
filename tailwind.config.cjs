@@ -10,6 +10,15 @@ module.exports = {
 	darkMode: 'class',
 	theme: {
 		extend: {
+			colors: {
+				transparent: 'transparent',
+				primary: "#0E0F10",
+				secondary: "#181A1D",
+				ascend: "#EB4F2D",
+				ascendSecondary: "#007CFA",
+				themeText: "#828282",
+				themeTextSecondary: "#4F4F4F",
+			},
 			fontFamily: {
 				sans: ['Inter', ...defaultTheme.fontFamily.sans],
 				opensans: ['Open Sans', 'sans-serif'],
