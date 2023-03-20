@@ -56,3 +56,22 @@
 	font-weight: 300;
 	font-style: italic;
 }
+li > .splide__pagination__page.is-active {
+	background: #eb4f2d;
+	opacity: 1;
+}
+li > .splide__pagination__page {
+	/* good background color for purple */
+	background: #9898a1;
+}
+div > .splide__arrow {
+	/* good background color for purple */
+	background: #828282;
+	padding: 10px;
+	opacity: 60%;
+}
+div > .splide__arrow:hover {
+	/* good background color for purple */
+	background: #9898a1;
+	opacity: 100%;
+}

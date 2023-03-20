@@ -5,25 +5,24 @@ import { redis } from '$lib/server/redis';
 
 export const GET: RequestHandler = async ({ url, fetch, setHeaders }) => {
 	try {
-		const page = url.searchParams.get('page') || '1';
-		const cached = await redis.get('recent');
+		const cached = await redis.get('upcoming');
 		if (cached) {
-			console.log('Cached data found for recent episodes anime');
-			const ttl = await redis.ttl('recent');
+			console.log('Cached data found for upcoming animes');
+			const ttl = await redis.ttl('upcoming');
 			setHeaders({ 'cache-control': `max=age=${ttl}` });
 			return json(JSON.parse(cached) as Data);
 		} else {
-			console.log('Cached data not found for recent episodes');
+			console.log('Cached data not found for upcoming animes');
 
 			const response = await fetch(
-				`https://api.consumet.org/meta/anilist/recent-episodes?page=${page}&provider=zoro`
+				`https://api.consumet.org/meta/anilist/advanced-search?status=NOT_YET_RELEASED&sort=["POPULARITY_DESC","SCORE_DESC"]&perPage=4`
 			);
 			const data = await response.json();
-			redis.set('recent', JSON.stringify(data.results), 'EX', 60 * 60 * 24); // 1 day cache
+			redis.set('upcoming', JSON.stringify(data.results), 'EX', 60 * 60 * 24); // 1 day cache
 			return json(data as Data);
 		}
 	} catch (error) {
 		console.error(error);
-		return json(`failed to fetch data for recent episodes \n ${(error as Error).message}`);
+		return json(`failed to fetch data for upcoming animes \n ${(error as Error).message}`);
 	}
 };
