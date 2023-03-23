@@ -1,16 +1,29 @@
+<script lang="ts">
+	import { state } from '../../stores';
+
+	const toggleSidebar = () => {
+		state.update((n) => !n);
+		console.log($state);
+	};
+</script>
+
 <nav
 	id="page-sidebar"
-	class="flex flex-col fixed top-0 left-0 bottom-0 w-full lg:w-64 h-full bg-secondary text-themeText z-50 transform transition-transform duration-500 ease-out -translate-x-full lg:translate-x-0"
+	class="flex flex-col  fixed top-0 left-0 bottom-0 w-full lg:w-64  h-full bg-secondary text-themeText z-50 transform transition-transform duration-500 ease-in -translate-x-full lg:translate-x-0"
 	aria-label="Main Sidebar Navigation"
+	class:lg:w-24={!$state}
+	class:lg:w-64={$state}
+
 >
 	<!-- Sidebar Header -->
 	<div
 		class="h-16 bg-secondary bg-opacity-25 flex-none flex items-center justify-between lg: px-4 w-full"
 	>
 		<!-- Brand -->
+		<div class="flex" class:block={!$state} class:flex={$state}>
 		<a
 			href="javascript:void(0)"
-			class="inline-flex items-center space-x-2 font-bold text-lg tracking-wide text-white hover:opacity-75"
+			class="inline-flex items-center space-x-2 font-bold text-lg  tracking-wide text-white hover:opacity-75"
 		>
 			<img
 				src="/images/Anifox.svg"
@@ -18,9 +31,9 @@
 				alt=""
 				srcset=""
 			/>
-			<span class="font-gothamBold text-lg">Anifox </span>
+			<span class="font-gothamBold text-lg" class:hidden={!$state}>Anifox </span>
 		</a>
-		<button class="p-2 flex justify-center items-center my-auto">
+		<button class="p-2 flex justify-center items-center my-auto" on:click={toggleSidebar}>
 			<svg
 				class="hi-mini hi-chevron-double-left inline-block w-5 h-5"
 				xmlns="http://www.w3.org/2000/svg"
@@ -34,6 +47,7 @@
 				/></svg
 			>
 		</button>
+	</div>
 		<!-- END Brand -->
 
 		<!-- Close Sidebar on Mobile -->
@@ -66,6 +80,7 @@
 				<a
 					href="javascript:void(0)"
 					class="flex items-center space-x-3  font-medium rounded text-gray-400 bg-opacity-60"
+					class:hidden={!$state}
 				>
 					<div class="relative">
 						<svg
@@ -99,12 +114,16 @@
 
 					<span class="py-2 grow  ">Home</span>
 				</a>
-				<div class=" pt-5 pb-2 text-xs font-medium uppercase tracking-wider text-themeText">
+				<div
+					class=" pt-5 pb-2 text-xs font-medium uppercase tracking-wider text-themeText"
+					class:hidden={!$state}
+				>
 					Menu
 				</div>
 				<a
 					href="javascript:void(0)"
 					class="flex items-center space-x-3  font-medium rounded text-themeText hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40"
+					class:hidden={!$state}
 				>
 					<span class="flex-none flex items-center opacity-100">
 						<svg
@@ -125,6 +144,7 @@
 				<a
 					href="javascript:void(0)"
 					class="flex items-center space-x-3  font-medium rounded text-themeText hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40"
+					class:hidden={!$state}
 				>
 					<span class="flex-none flex items-center opacity-50">
 						<svg
@@ -144,6 +164,7 @@
 				<a
 					href="javascript:void(0)"
 					class="flex items-center space-x-3  font-medium rounded text-themeText hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40"
+					class:hidden={!$state}
 				>
 					<span class="flex-none flex items-center opacity-50">
 						<svg
@@ -166,6 +187,7 @@
 				<a
 					href="javascript:void(0)"
 					class="flex items-center space-x-3  font-medium rounded text-themeText hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40"
+					class:hidden={!$state}
 				>
 					<span class="flex-none flex items-center opacity-50">
 						<svg
@@ -181,14 +203,15 @@
 							/></svg
 						>
 					</span>
-					<span class="py-2 grow">Search</span>
+					<span class="py-2 grow">Anime News</span>
 				</a>
-				<div class=" pt-5 pb-2 text-xs font-medium uppercase tracking-wider text-gray-400">
+				<div class=" pt-5 pb-2 text-xs font-medium uppercase tracking-wider text-gray-400" class:hidden="{!$state}">
 					Account
 				</div>
 				<a
 					href="javascript:void(0)"
 					class="flex items-center space-x-3  font-medium rounded text-themeText hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40"
+					class:hidden={!$state}
 				>
 					<span class="flex-none flex items-center opacity-50">
 						<svg
@@ -210,6 +233,7 @@
 				<a
 					href="javascript:void(0)"
 					class="flex items-center space-x-3  font-medium rounded text-themeText hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40"
+					class:hidden={!$state}
 				>
 					<span class="flex-none flex items-center opacity-50">
 						<svg
@@ -236,6 +260,7 @@
 				<a
 					href="javascript:void(0)"
 					class="flex items-center space-x-3  font-medium rounded text-themeText hover:text-gray-100 hover:bg-gray-700 hover:bg-opacity-60 active:bg-gray-700 active:bg-opacity-40"
+					class:hidden={!$state}
 				>
 					<span class="flex-none flex items-center opacity-50">
 						<svg

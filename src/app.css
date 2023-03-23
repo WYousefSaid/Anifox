@@ -75,3 +75,7 @@ div > .splide__arrow:hover {
 	background: #9898a1;
 	opacity: 100%;
 }
+#page-sidebar,
+#page-container {
+		transition: all 0.3s ease-in-out;
+	}

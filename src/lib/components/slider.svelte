@@ -30,7 +30,7 @@
 					<img
 						src={item.cover}
 						alt=""
-						loading="lazy"
+						
 						class="h-96 rounded-3xl object-cover w-full"
 						srcset=""
 					/>
