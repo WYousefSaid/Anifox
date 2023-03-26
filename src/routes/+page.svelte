@@ -6,7 +6,7 @@
 	// import type { Data } from'$lib/types';
 	// export let data: Data;
 	import '@splidejs/svelte-splide/css';
-	import type { Data } from '$lib/types';
+	
 	export let data;
 	console.log(data);
 </script>

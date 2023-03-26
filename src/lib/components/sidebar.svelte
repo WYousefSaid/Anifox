@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { state } from '../../stores';
-
+let Sidebar = false;
 	const toggleSidebar = () => {
 		state.update((n) => !n);
 		console.log($state);
+		Sidebar = !Sidebar;
 	};
+	
 </script>
 
 <nav
@@ -13,41 +15,42 @@
 	aria-label="Main Sidebar Navigation"
 	class:lg:w-24={!$state}
 	class:lg:w-64={$state}
-
 >
 	<!-- Sidebar Header -->
 	<div
 		class="h-16 bg-secondary bg-opacity-25 flex-none flex items-center justify-between lg: px-4 w-full"
 	>
 		<!-- Brand -->
-		<div class="flex" class:block={!$state} class:flex={$state}>
-		<a
-			href="javascript:void(0)"
-			class="inline-flex items-center space-x-2 font-bold text-lg  tracking-wide text-white hover:opacity-75"
-		>
-			<img
-				src="/images/Anifox.svg"
-				class="h-10 w-10 -rotate-12 hover:rotate-0 duration-150"
-				alt=""
-				srcset=""
-			/>
-			<span class="font-gothamBold text-lg" class:hidden={!$state}>Anifox </span>
-		</a>
-		<button class="p-2 flex justify-center items-center my-auto" on:click={toggleSidebar}>
-			<svg
-				class="hi-mini hi-chevron-double-left inline-block w-5 h-5"
+		<div class="flex w-full justify-between items-center  " class:flex-col={!$state} class:flex={$state} >
+			<a
+				href="javascript:void(0)"
+				class="inline-flex items-center space-x-2 font-bold text-lg  tracking-wide text-white hover:opacity-75"
+			>
+				<img
+					src="/images/Anifox.svg"
+					class="h-10 w-10 -rotate-12 hover:rotate-0 duration-150"
+					alt=""
+					srcset=""
+				/>
+				<span class="font-gothamBold text-lg" class:hidden={!$state}>Anifox </span>
+			</a>
+			<button class="p-2 flex justify-center items-center my-auto transition ease-out duration-500  " on:click={toggleSidebar} class:rotate-180={Sidebar} >
+				
+				<svg
+				class="hi-mini hi-chevron-left inline-block w-5 h-5"
 				xmlns="http://www.w3.org/2000/svg"
 				viewBox="0 0 20 20"
 				fill="currentColor"
 				aria-hidden="true"
 				><path
 					fill-rule="evenodd"
-					d="M15.79 14.77a.75.75 0 01-1.06.02l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 111.04 1.08L11.832 10l3.938 3.71a.75.75 0 01.02 1.06zm-6 0a.75.75 0 01-1.06.02l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 111.04 1.08L5.832 10l3.938 3.71a.75.75 0 01.02 1.06z"
+					d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
 					clip-rule="evenodd"
 				/></svg
 			>
-		</button>
-	</div>
+			
+			</button>
+		</div>
 		<!-- END Brand -->
 
 		<!-- Close Sidebar on Mobile -->
@@ -205,7 +208,10 @@
 					</span>
 					<span class="py-2 grow">Anime News</span>
 				</a>
-				<div class=" pt-5 pb-2 text-xs font-medium uppercase tracking-wider text-gray-400" class:hidden="{!$state}">
+				<div
+					class=" pt-5 pb-2 text-xs font-medium uppercase tracking-wider text-gray-400"
+					class:hidden={!$state}
+				>
 					Account
 				</div>
 				<a

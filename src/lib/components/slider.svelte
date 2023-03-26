@@ -20,7 +20,7 @@
 			autoplay: true,
 			pauseOnHover: true,
 			resetProgress: false,
-			interval: 3000
+			interval: 4500
 		}}
 		aria-label="Anime Covers"
 	>

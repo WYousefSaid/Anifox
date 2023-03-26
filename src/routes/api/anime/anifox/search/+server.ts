@@ -7,7 +7,7 @@ export const GET: RequestHandler = async ({ url, fetch, setHeaders }) => {
 	try {
 		const page = url.searchParams.get('page') || '1';
 		const query = url.searchParams.get('query') || '';
-		const cached = await redis.get(`${query}`);
+		const cached = await redis.get(`search:${query}`);
 		if (cached) {
 			console.log(`Cached data found for ${query}`);
 			const ttl = await redis.ttl(`${query}`);
