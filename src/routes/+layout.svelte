@@ -5,41 +5,34 @@
 	import { clickOutside } from '$lib/outside.js';
 	$: $state = $state;
 	let value = '';
-  let inputElement: HTMLInputElement;
+	let inputElement: HTMLInputElement;
 	$: console.log(value);
-	let showSearching = false;
-	let isResults = false;
-	let queryTimeoutId:any;
+	let showSearching = true;
+	let isResults = true;
+	let queryTimeoutId: any;
 	$: value;
 	$: onQueryChange(value);
-	let results : Data[] = [];
+	let data: Data[] = [];
+	$: data;
+	$: console.log(data);
 	// WOW
-	function onQueryChange(query : string) {
-		if(query.length >= 3){
-		if (query) {
-			if (queryTimeoutId) {
-				clearTimeout(queryTimeoutId);
+	function onQueryChange(query: string) {
+		if (query.length >= 3) {
+			if (query) {
+				if (queryTimeoutId) {
+					clearTimeout(queryTimeoutId);
+				}
+				queryTimeoutId = setTimeout(async () => {
+					doSearch(query);
+				}, 1000);
 			}
-			queryTimeoutId = setTimeout(async () => {
-				doSearch(query);
-			}, 2000);
 		}
 	}
-	}
-	async function doSearch(query : string) {
+	async function doSearch(query: string) {
 		try {
 			const response = await fetch('/api/anime/anifox/search?query=' + query);
 			let res = await response.json();
-			if (res.length == 0 && res == null && res == undefined) {
-			isResults = false;
-
-			}else{
-				results = res;
-			isResults = true;
-
-			}
-			
-			
+			data = res.results;
 		} catch (error) {
 			console.error('Error fetching data from API:', error);
 		}
@@ -99,65 +92,79 @@
 		<div class="mr-4 flex gap-8">
 			<div class="flex items-center justify-center ">
 				<div class="flex relative ">
-						<input type="text" on:click={() => {
+					<input
+						type="text"
+						on:click={() => {
 							showSearching = true;
-						}} bind:this={inputElement}
+						}}
+						bind:this={inputElement}
 						on:input={() => {
 							value = inputElement.value;
 						}}
-						
-						 class="px-4 bg-secondary rounded-r-sm text-themeText  focus:outline-none focus:border-none focus:ring-1 focus:ring-ascend rounded-l-md py-2 w-80" placeholder="Search...">
-						<div class="relative ">
-							<div class="absolute inset-0 bg-ascend blur "></div>
-						<button class="flex relative items-center h-full  justify-center px-4 rounded-r-md bg-ascend shadow-xl">
-								<svg class="w-6 h-6 text-slate-200" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 24 24">
-										<path
-												d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
-								</svg>
+						class="px-4 bg-secondary rounded-r-sm text-themeText  focus:outline-none focus:border-none focus:ring-1 focus:ring-ascend rounded-l-md py-2 w-80"
+						placeholder="Search..."
+					/>
+					<div class="relative ">
+						<div class="absolute inset-0 bg-ascend blur " />
+						<button
+							class="flex relative items-center h-full  justify-center px-4 rounded-r-md bg-ascend shadow-xl"
+						>
+							<svg
+								class="w-6 h-6 text-slate-200"
+								fill="currentColor"
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24"
+							>
+								<path
+									d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"
+								/>
+							</svg>
 						</button>
 					</div>
-					{#if showSearching && isResults && results.length > 0}
-							<h1>Loading</h1>
-							
-						
-				<div class="w-full absolute rounded-b-md bottom--10 mt-11 z-100 bg-secondary  " use:clickOutside>
-					<ul class="font-gotham ">
-						{#each results.slice(0,4) as item }
-							
-					<a href="#" class="">
-						<li class="w-full flex h-28  border-ascend">
-							<img class="p-2 w-20 object-cover" src="{item.image}" alt="anime poster" srcset="" >
-							<div class="info  w-full flex flex-col justify-between p-2">
-								<h1 class="text-slate-200 font-gothamMedium line-clamp-1 text-base">{item.title.userPreferred}</h1>
-								<h1 class="text-slate-400 text-xs">{item.title.english}</h1>
-								<div class="w-full">
-									<ul class="flex gap-2 w-full  items-center text-slate-500 text-sm">
-										
-										<li>{item.totalEpisodes} Ep</li>
-										<i class="dot w-1 h-1 rounded-full bg-themeText"></i>
+					{#if showSearching && isResults && data.length > 0}
+						<div
+							class="w-full absolute rounded-b-md bottom--10 mt-11 z-100 bg-secondary  "
+							use:clickOutside
+							on:outclick={() => {
+								showSearching = false;
+							}}
+						>
+							<ul class="font-gotham ">
+								{#each data.slice(0, 4) as item}
+									<a href="#" class="">
+										<li class="w-full flex h-28  border-ascend">
+											<img
+												class="p-2 w-20 object-cover"
+												src={item.image}
+												alt="anime poster"
+												srcset=""
+											/>
+											<div class="info  w-full flex flex-col justify-between p-2">
+												<h1 class="text-slate-200 font-gothamMedium line-clamp-1 text-base">
+													{item.title.userPreferred}
+												</h1>
+												<h1 class="text-slate-400 text-xs">{item.title.english}</h1>
+												<div class="w-full">
+													<ul class="flex gap-2 w-full  items-center text-slate-500 text-sm">
+														<li>{item.totalEpisodes} Ep</li>
+														<i class="dot w-1 h-1 rounded-full bg-themeText" />
 
-										<li class="text-ascendSecondary">{item.type}</li>
-										<i class="dot w-1 h-1 rounded-full bg-themeText"></i>
+														<li class="text-ascendSecondary">{item.type}</li>
+														<i class="dot w-1 h-1 rounded-full bg-themeText" />
 
-										<li>{item.releaseDate}</li>
-									</ul>
-								</div>
-
-								
-							</div>
-						</li>
-						<div class="border-[0.5px] border-dashed border-themeText w-full"></div>
-
-					</a>
-					{/each}
-					
-					</ul>
+														<li>{item.releaseDate}</li>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<div class="border-[0.5px] border-dashed border-themeText w-full" />
+									</a>
+								{/each}
+							</ul>
+						</div>
+					{/if}
 				</div>
-				{/if}
-
-				</div>
-		</div>
+			</div>
 			<button>
 				<svg
 					class="hi-outline hi-bell inline-block w-6 h-6 stroke-slate-200 hover:stroke-slate-300"
