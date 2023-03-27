@@ -101,7 +101,8 @@
 									<div class="relative w-max">
 										<div class="absolute inset-0   blur border-b-8 border-ascend " />
 										<a
-											href="javascript:void(0)"
+											href="/watch/{item.id}"
+											data-sveltekit-preload-data="hover"
 											class="inline-flex justify-center items-center space-x-2 border font-medium font-gothamBook rounded-lg px-4 py-2 leading-6 border-ascend bg-ascend text-white relative hover:text-white hover:bg-orange-600 hover:border-orange-600 focus:ring focus:ring-orange-400 focus:ring-opacity-50 active:bg-ascend active:border-ascend dark:focus:ring-orange-400 dark:focus:ring-opacity-90"
 										>
 											<svg

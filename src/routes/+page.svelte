@@ -80,16 +80,18 @@
 				<div id="box" class="w-full flex  items-center h-32 bg-secondary p-2 rounded-2xl">
 					
 					<div class="info  flex">
-						
+						<a href="/watch/{item.id}" data-sveltekit-preload-data>
 						<img
 							src="{item.image}"
 							alt=""
 							class="h-24 w-32 object-cover  rounded-3xl"
 						/>
-						
+					</a>
 						<div class="flex flex-col pl-2 justify-between font-gotham text-xs w-full p-1">
 							<div class="flex justify-between pr-2 ">
+								<a href="/watch/{item.id}" data-sveltekit-preload-data>
 						<h1 class="font-gothamMedium line-clamp-2 text-white text-sm">{item.title.english}</h1>
+					</a>
 						<div class="flex items-center p-1 rounded-xl text-sm  h-5 bg-slate-500 opacity-80 text-white">
 							{item.rating}%<svg
 								aria-hidden="true"
@@ -221,7 +223,7 @@
 					{#each data.trending.slice(0, 3) as card}
 						<a
 							data-sveltekit-preload-code="hover"
-							href="/anime/id/{card.id}"
+							href="/watch/{card.id}"
 							class="group relative overflow-hidden aspect-w-16 aspect-h-10 bg-black/25 rounded-2xl transition hover:ring-4 hover:ring-orange-500/50 active:opacity-75 active:ring-orange-500/25"
 						>
 							<img
@@ -283,7 +285,7 @@
 							<div class="t">
 								<div class=" px-5  flex mb-2 ">
 									<div class="min-w-30 h-32 ">
-										<a data-sveltekit-preload-data="hover" class="" href="/anime/id/{item.id}">
+										<a data-sveltekit-preload-data="hover" class="" href="/watch/{item.id}">
 											<img src={item.image} alt="" loading="lazy" class="min-w-30 h-32" />
 										</a>
 									</div>
@@ -292,7 +294,7 @@
 											<div
 												class="font-gothamMedium text-sm lg:text-sm hover:text-gray-400  line-clamp-1"
 											>
-												<a data-sveltekit-preload-data="hover" href="/anime/id/{item.id}" class="  "
+												<a data-sveltekit-preload-data="hover" href="/watch/{item.id}" class="  "
 													>{item.title.english}</a
 												>
 											</div>
@@ -331,7 +333,7 @@
 							<div class="t">
 								<div class=" px-5  flex mb-2 ">
 									<div class="min-w-30 h-32">
-										<a data-sveltekit-preload-data="hover" class="" href="/anime/id/{item.id}">
+										<a data-sveltekit-preload-data="hover" class="" href="/watch/{item.id}">
 											<img src={item.image} alt="" loading="lazy" class="min-w-30 h-32" />
 										</a>
 									</div>
@@ -340,7 +342,7 @@
 											<div
 												class="font-gothamMedium text-sm lg:text-sm hover:text-gray-400  line-clamp-1"
 											>
-												<a data-sveltekit-preload-data="hover" href="/anime/id/{item.id}" class="  "
+												<a data-sveltekit-preload-data="hover" href="/watch/{item.id}" class="  "
 													>{item.title.english}</a
 												>
 											</div>

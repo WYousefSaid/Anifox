@@ -2,7 +2,8 @@
 		import type { PageData } from './$types';
 
 	export let data;
-	$: console.log(data);
+	$: ({info}=data)
+	
 	
 	
 </script>

@@ -6,6 +6,6 @@ export const load = (async ({fetch, params})  => {
 	
 	
 	return {
-		data : data as ApiResponse
+		info : data as ApiResponse
 	};
 }) satisfies PageServerLoad;
