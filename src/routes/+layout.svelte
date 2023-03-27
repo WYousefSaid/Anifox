@@ -3,18 +3,18 @@
 	import { state } from '../stores';
 	import type { Data } from '$lib/types';
 	import { clickOutside } from '$lib/outside.js';
+	import Sidebar from '$lib/components/sidebar.svelte';
+
 	$: $state = $state;
 	let value = '';
 	let inputElement: HTMLInputElement;
-	$: console.log(value);
-	let showSearching = true;
-	let isResults = true;
+	let showSearching = false;
+	let isResults = false;
 	let queryTimeoutId: any;
 	$: value;
 	$: onQueryChange(value);
 	let data: Data[] = [];
 	$: data;
-	$: console.log(data);
 	// WOW
 	function onQueryChange(query: string) {
 		if (query.length >= 3) {
@@ -33,6 +33,7 @@
 			const response = await fetch('/api/anime/anifox/search?query=' + query);
 			let res = await response.json();
 			data = res.results;
+			isResults = true;
 		} catch (error) {
 			console.error('Error fetching data from API:', error);
 		}
@@ -40,7 +41,7 @@
 </script>
 
 <!-- Page Container -->
-
+<Sidebar />
 <div
 	id="page-container"
 	class="flex flex-col mx-auto w-full min-h-screen bg-gray-100 lg:pl-64"
@@ -123,7 +124,7 @@
 					</div>
 					{#if showSearching && isResults && data.length > 0}
 						<div
-							class="w-full absolute rounded-b-md bottom--10 mt-11 z-100 bg-secondary  "
+							class="w-full absolute rounded-b-md bottom--10 mt-11 z-100 bg-secondary border-[0.5px] border-secondary "
 							use:clickOutside
 							on:outclick={() => {
 								showSearching = false;
@@ -132,7 +133,7 @@
 							<ul class="font-gotham ">
 								{#each data.slice(0, 4) as item}
 									<a href="#" class="">
-										<li class="w-full flex h-28  border-ascend">
+										<li class="w-full flex h-24  border-ascend">
 											<img
 												class="p-2 w-20 object-cover"
 												src={item.image}
@@ -140,12 +141,12 @@
 												srcset=""
 											/>
 											<div class="info  w-full flex flex-col justify-between p-2">
-												<h1 class="text-slate-200 font-gothamMedium line-clamp-1 text-base">
+												<h1 class="text-slate-200 font-gothamMedium line-clamp-1 text-sm">
 													{item.title.userPreferred}
 												</h1>
 												<h1 class="text-slate-400 text-xs">{item.title.english}</h1>
 												<div class="w-full">
-													<ul class="flex gap-2 w-full  items-center text-slate-500 text-sm">
+													<ul class="flex gap-2 w-full  items-center text-slate-500 text-xs">
 														<li>{item.totalEpisodes} Ep</li>
 														<i class="dot w-1 h-1 rounded-full bg-themeText" />
 
@@ -157,7 +158,13 @@
 												</div>
 											</div>
 										</li>
-										<div class="border-[0.5px] border-dashed border-themeText w-full" />
+										<div class="relative">
+											<div
+												class=" absolute inset-0 blur border-[0.2px] border-dashed border-slate-400 w-full"
+											/>
+
+											<div class="border-[0.2px] border-dashed border-slate-600 w-full" />
+										</div>
 									</a>
 								{/each}
 							</ul>

@@ -30,3 +30,69 @@ export type Data = {
 	hasNextPage: boolean;
 	results: Anime[];
 };
+export interface ApiResponse {
+  id: string;
+  title: string[];
+  malId: number;
+  trailer: {
+    id: string;
+    site: string;
+    thumbnail: string;
+  };
+  image: string;
+  popularity: number;
+  color: string;
+  description: string;
+  status: string;
+  releaseDate: number;
+  startDate: {
+    year: number;
+    month: number;
+    day: number;
+  };
+  endDate: {
+    year: number | null;
+    month: number | null;
+    day: number | null;
+  };
+  rating: number;
+  genres: string[];
+  season: string;
+  studios: string[];
+  type: string;
+  recommendations: {
+    id: string;
+    malId: string;
+    title: string[];
+    status: string;
+    episodes: number;
+    image: string;
+    cover: string;
+    rating: number;
+    type: string;
+  };
+  characters: {
+    id: string;
+    role: string;
+    name: string[];
+    image: string;
+  };
+  relations: {
+    id: number;
+    relationType: string;
+    malId: number;
+    title: string[];
+    status: string;
+    episodes: number;
+    image: string;
+    color: string;
+    type: string;
+    cover: string;
+    rating: number;
+  };
+  episodes: {
+    id: string;
+    title: string;
+    episode: string;
+  };
+}

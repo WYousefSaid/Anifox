@@ -1,14 +1,12 @@
 <script lang="ts">
 	import Slider from '$lib/components/slider.svelte';
 
-	import Sidebar from '$lib/components/sidebar.svelte';
 	import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide';
 	// import type { Data } from'$lib/types';
 	// export let data: Data;
 	import '@splidejs/svelte-splide/css';
 	
 	export let data;
-	console.log(data);
 </script>
 
 <!-- 
@@ -40,7 +38,6 @@
       Closed 'lg:-translate-x-full'
       Opened 'lg:translate-x-0'
   -->
-<Sidebar />
 
 <!-- Page Header -->
 
@@ -255,7 +252,7 @@
 										</section>
 									</div>
 
-									<div
+									<!-- <div
 										class=" hidden xl:flex absolute right-3 items-center justify-center w-10 h-10 rounded-full transition text-slate-400 bg-secondary group-hover:bg-[#312e30] group-hover:text-white group-hover:scale-110 group-active:scale-100"
 									>
 										<svg
@@ -268,7 +265,7 @@
 												d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"
 											/>
 										</svg>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</a>

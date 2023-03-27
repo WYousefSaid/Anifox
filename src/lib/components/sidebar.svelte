@@ -3,7 +3,6 @@
 let Sidebar = false;
 	const toggleSidebar = () => {
 		state.update((n) => !n);
-		console.log($state);
 		Sidebar = !Sidebar;
 	};
 	
@@ -24,17 +23,19 @@ let Sidebar = false;
 		<div class="flex w-full justify-between items-center  " class:flex-col={!$state} class:flex={$state} >
 			<a
 				href="javascript:void(0)"
-				class="inline-flex items-center space-x-2 font-bold text-lg  tracking-wide text-white hover:opacity-75"
+				class:w-full={!$state}
+				class="inline-flex items-center  space-x-2 font-bold text-lg  tracking-wide text-white hover:opacity-75"
 			>
 				<img
 					src="/images/Anifox.svg"
-					class="h-10 w-10 -rotate-12 hover:rotate-0 duration-150"
+					class="h-10 w-10 -rotate-12 mx-auto hover:rotate-0 duration-150"
 					alt=""
 					srcset=""
+					class:mt-10={!$state}
 				/>
 				<span class="font-gothamBold text-lg" class:hidden={!$state}>Anifox </span>
 			</a>
-			<button class="p-2 flex justify-center items-center my-auto transition ease-out duration-500  " on:click={toggleSidebar} class:rotate-180={Sidebar} >
+			<button class="p-2 flex justify-center items-center my-auto transition ease-out duration-500  " class:w-full={!$state} on:click={toggleSidebar } class:rotate-180={Sidebar} class:mx-auto={!$state} >
 				
 				<svg
 				class="hi-mini hi-chevron-left inline-block w-5 h-5"
