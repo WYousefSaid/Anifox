@@ -299,7 +299,7 @@
 												>
 											</div>
 											<div class="flex items-center text-sm">
-												{item.rating}%
+												{item.rating / 10}
 												<svg
 													aria-hidden="true"
 													class="w-9 h-8 text-ascend"
@@ -347,7 +347,7 @@
 												>
 											</div>
 											<div class="flex items-center text-sm">
-												{item.rating}%
+												{item.rating /10} 
 												<svg
 													aria-hidden="true"
 													class="w-9 h-8 text-ascend"

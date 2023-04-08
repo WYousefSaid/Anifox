@@ -44,7 +44,7 @@
 <Sidebar />
 <div
 	id="page-container"
-	class="flex flex-col mx-auto w-full min-h-screen bg-gray-100 lg:pl-64"
+	class="flex flex-col mx-auto w-full min-h-screen bg-primary lg:pl-64"
 	class:lg:pl-24={!$state}
 	class:lg:pl-64={$state}
 >

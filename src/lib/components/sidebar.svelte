@@ -82,7 +82,7 @@ let Sidebar = false;
 		<div class="p-4 w-full">
 			<nav class="space-y-1">
 				<a
-					href="javascript:void(0)"
+					href="/"
 					class="flex items-center space-x-3  font-medium rounded text-gray-400 bg-opacity-60"
 					class:hidden={!$state}
 				>
