@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
-import type { Data } from '$lib/types';
+import type { Main } from '$lib/types';
 import { redis } from '$lib/server/redis';
 import { error } from '@sveltejs/kit';
 export const GET: RequestHandler = async ({ url, fetch, setHeaders }) => {
@@ -12,7 +12,7 @@ export const GET: RequestHandler = async ({ url, fetch, setHeaders }) => {
 
 			const response = await fetch(`https://api.consumet.org/meta/anilist/${query}?page=${page}`);
 			const data = await response.json();
-			return json(data as Data);
+			return json(data as Main);
 	} catch (error) {
 		console.error(error);
 		return json(`failed to fetch data for ur search query \n ${(error as Error).message}`);

@@ -5,8 +5,9 @@
 	// import type { Data } from'$lib/types';
 	// export let data: Data;
 	import '@splidejs/svelte-splide/css';
-	
+
 	export let data;
+	$: console.log(data);
 </script>
 
 <!-- 
@@ -48,9 +49,7 @@
 >
 	<div class="flex-none lg:flex flex-col w-full lg:w-80 xl:w-96 p-4 lg:pr-8 bg-primary">
 		<!-- Placeholder -->
-		<div
-			class="flex flex-col rounded-3xl bg-primary  text-gray-400 "
-		>
+		<div class="flex flex-col rounded-3xl bg-primary  text-gray-400 ">
 			<div class="flex  w-full justify-between mb-2">
 				<h2 class="text-white font-gothamMedium text-xl">Recent Episodes</h2>
 				<a
@@ -73,48 +72,47 @@
 					</svg>
 				</a>
 			</div>
-			{#each data.recent.slice(0,3) as item}
-			
-			<div id="recent-container" class="mb-2 relative">
-				<span class="absolute bg-blue-700 font-gothamBook text-xs z-20 rounded-r-sm text-white py-[2px] px-2 bottom-6">New</span>
-				<div id="box" class="w-full flex  items-center h-32 bg-secondary p-2 rounded-2xl">
-					
-					<div class="info  flex">
-						<a href="/watch/{item.id}" data-sveltekit-preload-data>
-						<img
-							src="{item.image}"
-							alt=""
-							class="h-24 w-32 object-cover  rounded-3xl"
-						/>
-					</a>
-						<div class="flex flex-col pl-2 justify-between font-gotham text-xs w-full p-1">
-							<div class="flex justify-between pr-2 ">
-								<a href="/watch/{item.id}" data-sveltekit-preload-data>
-						<h1 class="font-gothamMedium line-clamp-2 text-white text-sm">{item.title.english}</h1>
-					</a>
-						<div class="flex items-center p-1 rounded-xl text-sm  h-5 bg-slate-500 opacity-80 text-white">
-							{item.rating}%<svg
-								aria-hidden="true"
-								class="w-4 h-4 text-ascend"
-								fill="currentColor"
-								viewBox="0 0 20 20"
-								xmlns="http://www.w3.org/2000/svg"
-								><title>First star</title><path
-									d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-								/></svg
-							>
+			{#each data.recent.results.slice(0, 5) as item}
+				<div id="recent-container" class="mb-2 relative">
+					<span
+						class="absolute bg-blue-700 font-gothamBook text-xs z-20 rounded-r-sm text-white py-[2px] px-2 bottom-6"
+						>New</span
+					>
+					<div id="box" class="w-full flex  items-center h-32 bg-secondary p-2 rounded-2xl">
+						<div class="info  flex">
+							<a href="/info/{item.id}" data-sveltekit-preload-data>
+								<img src={item.image} alt="" class="h-24 w-32 object-cover  rounded-3xl" />
+							</a>
+							<div class="flex flex-col pl-2 justify-between font-gotham text-xs w-full p-1">
+								<div class="flex justify-between pr-2 ">
+									<a href="/info/{item.id}" data-sveltekit-preload-data>
+										<h1 class="font-gothamMedium line-clamp-2 text-white text-sm">
+											{item.title.english ?? item.title.userPreferred}
+										</h1>
+									</a>
+									<div
+										class="flex items-center p-1 rounded-xl text-sm  h-5 bg-slate-500 opacity-80 text-white"
+									>
+										{item.rating}%<svg
+											aria-hidden="true"
+											class="w-4 h-4 text-ascend"
+											fill="currentColor"
+											viewBox="0 0 20 20"
+											xmlns="http://www.w3.org/2000/svg"
+											><title>First star</title><path
+												d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+											/></svg
+										>
+									</div>
+								</div>
+								<h1 class="text-sm w-full line-clamp-2">{item.episodeTitle}</h1>
+								<div class="flex justify-between w-full">
+									<span class="text-ascendSecondary">Episode {item.episodeNumber}</span>
+								</div>
+							</div>
 						</div>
 					</div>
-					<h1 class="text-sm w-full line-clamp-2">{item.episodeTitle}</h1>
-					<div class="flex justify-between w-full">
-						<span class="text-ascendSecondary">Episode {item.episodeNumber}</span>
-						
-					</div>
-
-					</div>
-					</div>
 				</div>
-			</div>
 			{/each}
 			<div class="flex  w-full justify-between mb-2">
 				<h2 class="text-white font-gothamMedium text-xl">Best Upcomming</h2>
@@ -138,12 +136,11 @@
 					</svg>
 				</a>
 			</div>
-			{#each data.upcoming as item}
-			<nav class="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-1 gap-4 lg:gap-8 ">
-				
+			{#each data.upcoming.results as item}
+				<nav class="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-1 gap-4 lg:gap-8 ">
 					<a
 						data-sveltekit-preload-code="hover"
-						href="/anime/id/{item.id}"
+						href="/info/{item.id}"
 						class="group relative overflow-hidden aspect-w-16 aspect-h-10 bg-black/25 rounded-2xl transition hover:ring-4 hover:ring-orange-500/50 active:opacity-75 active:ring-orange-500/25 mb-2"
 					>
 						<img
@@ -152,31 +149,25 @@
 							alt="trending anime"
 							loading="lazy"
 						/>
-
-						
 					</a>
-					<!-- END Movie -->
-			</nav>
-			
-							<div class="flex items-end justify-between space-x-2 mb-2 border-b border-themeText w-full
-							">
-								<div class="space-y-1 w-full">
-									<h3 class="text-sm  xl:text-[15px] font-gotham   text-white ">
-										{item.title.english || item.title.romaji}
-									</h3>
-									<section class="flex justify-between w-full text-sm font-gothamMedium text-themeText">
-										<span> Year: {item.releaseDate}</span>
-										<div>status: {item.status}</div>
-									
-									</section>
-								</div>
+				</nav>
 
-								
-							</div>
-						
+				<div
+					class="flex items-end justify-between space-x-2 mb-2 border-b border-themeText w-full
+							"
+				>
+					<div class="space-y-1 w-full">
+						<h3 class="text-sm  xl:text-[15px] font-gotham   text-white ">
+							{item.title.english || item.title.romaji}
+						</h3>
+						<section class="flex justify-between w-full text-sm font-gothamMedium text-themeText">
+							<span> Year: {item.releaseDate}</span>
+							<div>status: {item.status}</div>
+						</section>
+					</div>
+				</div>
 			{/each}
 		</div>
-		
 	</div>
 	<!-- END Side Content -->
 
@@ -192,7 +183,7 @@
 		<div
 			class=" flex flex-auto min-w-full flex-col rounded-3xl bg-primary     border-gray-200 text-gray-400 "
 		>
-			<Slider slide={data.trending} />
+			<Slider slide={data.trending.results} />
 
 			<section class="space-y-6 py-6 px-2 text-themeText  w-full  container">
 				<div class="flex items-center justify-between ">
@@ -220,11 +211,11 @@
 				<nav class="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 ">
 					<!-- Movie -->
 					<!-- lol -->
-					{#each data.trending.slice(0, 3) as card}
+					{#each data.trending.results.slice(0, 3) as card}
 						<a
 							data-sveltekit-preload-code="hover"
-							href="/watch/{card.id}"
-							class="group relative overflow-hidden aspect-w-16 aspect-h-10 bg-black/25 rounded-2xl transition hover:ring-4 hover:ring-orange-500/50 active:opacity-75 active:ring-orange-500/25"
+							href="/info/{card.id}"
+							class="group relative  aspect-w-16 overflow-hidden aspect-h-10 bg-black/25 rounded-2xl transition hover:ring-4 hover:ring-orange-500/50 active:opacity-75 active:ring-orange-500/25"
 						>
 							<img
 								class="object-cover rounded-2xl h-full opacity-100 transform transition duration-300 ease-out group-hover:scale-105 group-focus:scale-105 group-focus-within:scale-105"
@@ -234,7 +225,7 @@
 							/>
 
 							<div
-								class="absolute inset-0 flex flex-col justify-between bg-gradient-to-b from-transparent  via-black/60 to-black"
+								class="absolute rounded-[15px] inset-0 flex flex-col justify-between bg-gradient-to-b from-transparent  via-black/60 to-black"
 							>
 								<div class="p-4 flex items-end justify-start space-x-2" />
 								<div class="px-4 py-5 flex items-end justify-between space-x-2">
@@ -281,11 +272,11 @@
 						class="bg-secondary flex flex-col text-2xl font-gotham overflow-clip bg-black/25 rounded-[40px] p-4 gap-2"
 					>
 						<div class="h-16  flex  justify-between  mx-auto dark:text-white">Most Popular</div>
-						{#each data.popular.slice(3, 8) as item}
+						{#each data.popular.results.slice(3, 8) as item}
 							<div class="t">
 								<div class=" px-5  flex mb-2 ">
 									<div class="min-w-30 h-32 ">
-										<a data-sveltekit-preload-data="hover" class="" href="/watch/{item.id}">
+										<a data-sveltekit-preload-data="hover" class="" href="/info/{item.id}">
 											<img src={item.image} alt="" loading="lazy" class="min-w-30 h-32" />
 										</a>
 									</div>
@@ -294,7 +285,7 @@
 											<div
 												class="font-gothamMedium text-sm lg:text-sm hover:text-gray-400  line-clamp-1"
 											>
-												<a data-sveltekit-preload-data="hover" href="/watch/{item.id}" class="  "
+												<a data-sveltekit-preload-data="hover" href="/info/{item.id}" class="  "
 													>{item.title.english}</a
 												>
 											</div>
@@ -302,7 +293,7 @@
 												{item.rating / 10}
 												<svg
 													aria-hidden="true"
-													class="w-9 h-8 text-ascend"
+													class="w-7 h-7 text-ascend"
 													fill="currentColor"
 													viewBox="0 0 20 20"
 													xmlns="http://www.w3.org/2000/svg"
@@ -329,11 +320,11 @@
 						class="bg-secondary flex flex-col  text-2xl font-gotham overflow-clip bg-black/25 rounded-[40px] p-4 gap-2"
 					>
 						<div class="h-16  flex justify-center    dark:text-white">Top Airing</div>
-						{#each data.trending.slice(3, 8) as item}
+						{#each data.trending.results.slice(3, 8) as item}
 							<div class="t">
 								<div class=" px-5  flex mb-2 ">
 									<div class="min-w-30 h-32">
-										<a data-sveltekit-preload-data="hover" class="" href="/watch/{item.id}">
+										<a data-sveltekit-preload-data="hover" class="" href="/info/{item.id}">
 											<img src={item.image} alt="" loading="lazy" class="min-w-30 h-32" />
 										</a>
 									</div>
@@ -342,15 +333,15 @@
 											<div
 												class="font-gothamMedium text-sm lg:text-sm hover:text-gray-400  line-clamp-1"
 											>
-												<a data-sveltekit-preload-data="hover" href="/watch/{item.id}" class="  "
-													>{item.title.english}</a
+												<a data-sveltekit-preload-data="hover" href="/info/{item.id}" class="  "
+													>{item.title.english ?? item.title.userPreferred}</a
 												>
 											</div>
 											<div class="flex items-center text-sm">
-												{item.rating /10} 
+												{item.rating / 10}
 												<svg
 													aria-hidden="true"
-													class="w-9 h-8 text-ascend"
+													class="w-7 h-7 text-ascend"
 													fill="currentColor"
 													viewBox="0 0 20 20"
 													xmlns="http://www.w3.org/2000/svg"

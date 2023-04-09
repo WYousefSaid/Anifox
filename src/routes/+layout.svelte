@@ -23,7 +23,7 @@
 					clearTimeout(queryTimeoutId);
 				}
 				queryTimeoutId = setTimeout(async () => {
-					doSearch(query);
+					await doSearch(query);
 				}, 1000);
 			}
 		}
@@ -38,6 +38,7 @@
 			console.error('Error fetching data from API:', error);
 		}
 	}
+
 </script>
 
 <!-- Page Container -->
@@ -124,7 +125,7 @@
 					</div>
 					{#if showSearching && isResults && data.length > 0}
 						<div
-							class="w-full absolute rounded-b-md bottom--10 mt-11 z-100 bg-secondary border-[0.5px] border-secondary "
+							class="w-full absolute rounded-b-md bottom--10 mt-11 z-100  bg-secondary border-[0.5px] border-secondary "
 							use:clickOutside
 							on:outclick={() => {
 								showSearching = false;
@@ -132,8 +133,8 @@
 						>
 							<ul class="font-gotham ">
 								{#each data.slice(0, 4) as item}
-									<a href="#" class="">
-										<li class="w-full flex h-24  border-ascend">
+									<a href="/info/{item.id}" class="">
+										<li class="w-full flex h-24 hover:bg-themeTextSecondary/25 border-ascend">
 											<img
 												class="p-2 w-20 object-cover"
 												src={item.image}
@@ -142,7 +143,7 @@
 											/>
 											<div class="info  w-full flex flex-col justify-between p-2">
 												<h1 class="text-slate-200 font-gothamMedium line-clamp-1 text-sm">
-													{item.title.userPreferred}
+													{item.title.userPreferred ?? item.title.romaji}
 												</h1>
 												<h1 class="text-slate-400 text-xs">{item.title.english}</h1>
 												<div class="w-full">

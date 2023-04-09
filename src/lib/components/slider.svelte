@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide';
-	import type { Data } from '$lib/types';
+	import type { Main } from '$lib/types';
 	// export let slide: Data;
 	import '@splidejs/svelte-splide/css';
 	export let slide: any;
@@ -27,13 +27,7 @@
 		{#each slide as item}
 			<SplideSlide>
 				<div class="relative rounded-3xl">
-					<img
-						src={item.cover}
-						alt=""
-						
-						class="h-96 rounded-3xl object-cover w-full"
-						srcset=""
-					/>
+					<img src={item.cover} alt="" class="h-96 rounded-3xl object-cover w-full" srcset="" />
 					<div class="absolute text-2xl text-red-400 inset-0">
 						<div
 							class="absolute inset-0 rounded-xl  flex flex-col justify-between bg-gradient-to-l from-transparent via-primary/40 to-primary/90"
@@ -41,7 +35,7 @@
 							<div class="text-white  m-auto ml-16 ">
 								<article class="prose  lg:prose-base text-slate-400 font-gothamBook">
 									<h1 class="text-slate-100 m-0 p-0 line-clamp-2 font-gothamBold">
-										{item.title.english}
+										{item.title.english ?? item.title.userPreferred}
 									</h1>
 
 									<span>
@@ -101,7 +95,7 @@
 									<div class="relative w-max">
 										<div class="absolute inset-0   blur border-b-8 border-ascend " />
 										<a
-											href="/watch/{item.id}"
+											href="/info/{item.id}"
 											data-sveltekit-preload-data="hover"
 											class="inline-flex justify-center items-center space-x-2 border font-medium font-gothamBook rounded-lg px-4 py-2 leading-6 border-ascend bg-ascend text-white relative hover:text-white hover:bg-orange-600 hover:border-orange-600 focus:ring focus:ring-orange-400 focus:ring-opacity-50 active:bg-ascend active:border-ascend dark:focus:ring-orange-400 dark:focus:ring-opacity-90"
 										>

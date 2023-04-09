@@ -67,6 +67,7 @@ module.exports = {
 		require('@tailwindcss/forms'),
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/line-clamp'),
+		require('vidstack/tailwind.cjs'),
 		plugin(function ({ addUtilities }) {
 			const utilBgPatterns = {
 				'.pattern-dots-sm': {
