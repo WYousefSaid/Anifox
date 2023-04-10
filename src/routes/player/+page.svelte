@@ -9,22 +9,20 @@
 	}
 	onMount(async () => {
 		await defineCustomElements();
-  const player: any = document.querySelector('media-player');
-  player.onAttach(() => {
-    const track = player.textTracks.getById('eng');
-		console.log(track);
-		track.mode = 'showing';
-		
-  });
+		const player: any = document.querySelector('media-player');
+		player.onAttach(() => {
+			const track = player.textTracks.getById('eng');
+			console.log(track);
+			track.mode = 'showing';
+		});
 	});
-
 </script>
 
 <!-- remove `controls` attribute if you're designing a custom UI -->
 <media-player
 	aspect-ratio="16:9"
 	src="https://proxy.vnxservers.com/proxy/m3u8/https%3A%2F%2Fc-an-ca1.betterstream.cc%3A2223%2Fhls-playback%2F71f87b4028d27b3ba749bd2029f3248245618a740ca81a9a9863f257784436f85c939482f4d306945639b935dc612f23695aaa0310efe181533976bb454971570f52a27aefedb3f5b39dc42ff76ff223a5571dbd647137b83ab8603fe7be80f441ff29270fd28f0e4861792e54841b03f9bffdfb0a3e746916108fed27654dacc9da2d261ed4f0bdb40a4c4c0f749858%2Fmaster.m3u8"
-	class="relative"
+	class="relative -_-"
 >
 	<media-outlet
 		><track
