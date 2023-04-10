@@ -6,20 +6,20 @@ import { redis} from '$lib/server/redis';
 export const GET: RequestHandler = async ({ url, fetch, setHeaders }) => {
 	try {
 		const page = url.searchParams.get('page') || '1';
-		const cached = await redis.get('recent');
+		const cached = await redis.get(`recent:${page}`);
 		if (cached) {
 			console.log('Cached data found for recent episodes anime');
-			const ttl = await redis.ttl('recent');
+			const ttl = await redis.ttl(`recent:${page}`);
 			setHeaders({ 'cache-control': `max=age=${ttl}` });
 			return json(JSON.parse(cached) as Main);
 		} else {
 			console.log('Cached data not found for recent episodes');
 
 			const response = await fetch(
-				`https://api.consumet.org/meta/anilist/recent-episodes?page=${page}&provider=zoro`
+				`https://api.consumet.org/meta/anilist/recent-episodes?page=${page}&provider=zoro&perPage=40`
 			);
 			const data = await response.json();
-			redis.set('recent', JSON.stringify(data), 'EX', 60 * 60 * 3); // 1 day cache
+			redis.set(`recent:${page}`, JSON.stringify(data), 'EX', 60 * 60 * 3); // 1 day cache
 			return json(data as Main);
 		}
 	} catch (error) {

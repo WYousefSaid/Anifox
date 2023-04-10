@@ -93,7 +93,7 @@
 									<div
 										class="flex items-center p-1 rounded-xl text-sm  h-5 bg-slate-500 opacity-80 text-white"
 									>
-										{item.rating}%<svg
+										{item.rating/10}<svg
 											aria-hidden="true"
 											class="w-4 h-4 text-ascend"
 											fill="currentColor"

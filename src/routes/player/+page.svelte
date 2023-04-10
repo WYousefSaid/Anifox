@@ -7,29 +7,36 @@
 	function toggleSettings() {
 		settings = !settings;
 	}
-
 	onMount(async () => {
 		await defineCustomElements();
-		const player = document.querySelector('media-player');
-		player.onAttach(async () => {
-			console.log(player.qualities);
-
-			const firstQuality = player.qualities[0];
-			console.log(firstQuality);
-
-			firstQuality.selected = true;
-		});
+  const player: any = document.querySelector('media-player');
+  player.onAttach(() => {
+    const track = player.textTracks.getById('eng');
+		console.log(track);
+		track.mode = 'showing';
+		
+  });
 	});
+
 </script>
 
 <!-- remove `controls` attribute if you're designing a custom UI -->
 <media-player
 	aspect-ratio="16:9"
-	src="https://proxy.vnxservers.com/proxy/m3u8/https%3A%2F%2Fc-an-ca4.betterstream.cc%3A2223%2Fhls-playback%2F71f87b4028d27b3ba749bd2029f3248245618a740ca81a9a9863f257784436f85c939482f4d306945639b935dc612f2354571e8a39651b29dfd8bb75b36cf605b53dbc87d0bc2d738edb06eb320e78782097b3aa1c63076969f5ff90f760b7f0a4dbc416848f70db0b05e23b1e294ca69f4f0fb5486b21f856e582f56d1144aed8f421058344301f304de1635abe80c0%2Findex-f2-v1-a1.m3u8"
-	poster="https://media-files.vidstack.io/poster.png"
+	src="https://proxy.vnxservers.com/proxy/m3u8/https%3A%2F%2Fc-an-ca1.betterstream.cc%3A2223%2Fhls-playback%2F71f87b4028d27b3ba749bd2029f3248245618a740ca81a9a9863f257784436f85c939482f4d306945639b935dc612f23695aaa0310efe181533976bb454971570f52a27aefedb3f5b39dc42ff76ff223a5571dbd647137b83ab8603fe7be80f441ff29270fd28f0e4861792e54841b03f9bffdfb0a3e746916108fed27654dacc9da2d261ed4f0bdb40a4c4c0f749858%2Fmaster.m3u8"
 	class="relative"
 >
-	<media-outlet />
+	<media-outlet
+		><track
+			src="https://cc.zorores.com/92/31/923163216f44b24151732b8b984b1235/eng-2.vtt"
+			kind="subtitles"
+			label="English"
+			srclang="en-US"
+			default
+			data-type="vtt"
+			id="eng"
+		/></media-outlet
+	>
 
 	<div class="media-ui absolute bottom-5 w-full">
 		<!-- Time SLider Start -->

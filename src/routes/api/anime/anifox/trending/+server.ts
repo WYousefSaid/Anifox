@@ -7,11 +7,11 @@ export const GET: RequestHandler = async ({ url, fetch, setHeaders }) => {
 	try {
 		const page = url.searchParams.get('page') || '1';
 		const perPage = url.searchParams.get('PerPage') || '10';
-		const cached = await redis.get('trending');
+		const cached = await redis.get(`trending:${page}`);
 
 		if (cached) {
 			console.log('Cached data found for trending anime');
-			const ttl = await redis.ttl('trending');
+			const ttl = await redis.ttl(`trending:${page}`);
 			setHeaders({ 'cache-control': `max=age=${ttl}` });
 			return json(JSON.parse(cached) as Main);
 		} else {
@@ -21,7 +21,7 @@ export const GET: RequestHandler = async ({ url, fetch, setHeaders }) => {
 				`https://api.consumet.org/meta/anilist/trending?page=${page}&perPage=${perPage}`
 			);
 			const data = await response.json();
-			redis.set('trending', JSON.stringify(data), 'EX', 60 * 60 * 24); // 1 day cache
+			redis.set(`trending:${page}`, JSON.stringify(data), 'EX', 60 * 60 * 24); // 1 day cache
 			return json(data as Main);
 		}
 	} catch (error) {

@@ -161,10 +161,10 @@
 										</li>
 										<div class="relative">
 											<div
-												class=" absolute inset-0 blur border-[0.2px] border-dashed border-slate-400 w-full"
+												class=" absolute inset-0 blur border-[0.2px] border-solid border-slate-400 w-full"
 											/>
 
-											<div class="border-[0.2px] border-dashed border-slate-600 w-full" />
+											<div class="border-[0.2px] border-solid border-slate-600 w-full" />
 										</div>
 									</a>
 								{/each}
