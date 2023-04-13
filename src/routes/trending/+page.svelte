@@ -27,7 +27,7 @@
 				<div class="absolute inset-0 bg-gradient-to-t from-zinc-800 to-transparent" />
 
 				<img
-					class="  h-56 w-44 object-cover"
+					class="  	 w-44 object-cover"
 					src="{anime.image}"
 					alt=""
 					

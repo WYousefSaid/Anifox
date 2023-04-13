@@ -45,24 +45,24 @@
 <!-- Page Content -->
 <main
 	id="page-content"
-	class="flex flex-auto flex-col-reverse lg:flex-row-reverse max-w-full  bg-primary"
+	class="flex max-w-full flex-auto flex-col-reverse bg-primary lg:flex-row-reverse"
 >
-	<div class="flex-none lg:flex flex-col w-full lg:w-80 xl:w-96 p-4 lg:pr-8 bg-primary">
+	<div class="w-full flex-none flex-col p-4 bg-primary lg:flex lg:w-80 lg:pr-8 xl:w-96">
 		<!-- Placeholder -->
-		<div class="flex flex-col rounded-3xl bg-primary  text-gray-400 ">
-			<div class="flex  w-full justify-between mb-2">
-				<h2 class="text-white font-gothamMedium text-xl">Recent Episodes</h2>
+		<div class="flex flex-col rounded-3xl text-gray-400 bg-primary">
+			<div class="mb-2 flex w-full justify-between">
+				<h2 class="text-xl text-white font-gothamMedium">Recent Episodes</h2>
 				<a
 					data-sveltekit-preload-code="hover"
 					href="javascript:void(0)"
-					class="group flex items-center space-x-1 text-sm font-gotham transition dark:text-slate-400 dark:hover:text-white active:text-slate-400"
+					class="flex items-center text-sm transition group space-x-1 font-gotham active:text-slate-400 dark:text-slate-400 dark:hover:text-white"
 				>
 					<span>See All</span>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 20 20"
 						fill="currentColor"
-						class="w-5 h-5 opacity-50 transition ease-out group-hover:opacity-100 group-active:translate-x-2"
+						class="h-5 w-5 group-active:translate-x-2 opacity-50 transition ease-out group-hover:opacity-100"
 					>
 						<path
 							fill-rule="evenodd"
@@ -72,30 +72,30 @@
 					</svg>
 				</a>
 			</div>
-			{#each data.recent.results.slice(0, 5) as item}
-				<div id="recent-container" class="mb-2 relative">
+			{#each data.recent.results.slice(0, 3) as item}
+				<div id="recent-container" class="relative mb-2">
 					<span
-						class="absolute bg-blue-700 font-gothamBook text-xs z-20 rounded-r-sm text-white py-[2px] px-2 bottom-6"
+						class="absolute bottom-6 z-20 rounded-r-sm bg-blue-700 px-2 text-xs text-white font-gothamBook py-[2px]"
 						>New</span
 					>
-					<div id="box" class="w-full flex  items-center h-32 bg-secondary p-2 rounded-2xl">
-						<div class="info  flex">
+					<div id="box" class="flex h-32 w-full items-center rounded-2xl p-2 bg-secondary">
+						<div class="flex info">
 							<a href="/info/{item.id}" data-sveltekit-preload-data>
-								<img src={item.image} alt="" class="h-24 w-32 object-cover  rounded-3xl" />
+								<img src={item.image} alt="" class="h-24 w-32 rounded-3xl object-cover" />
 							</a>
-							<div class="flex flex-col pl-2 justify-between font-gotham text-xs w-full p-1">
-								<div class="flex justify-between pr-2 ">
+							<div class="flex w-full flex-col justify-between p-1 pl-2 text-xs font-gotham">
+								<div class="flex justify-between pr-2">
 									<a href="/info/{item.id}" data-sveltekit-preload-data>
-										<h1 class="font-gothamMedium line-clamp-2 text-white text-sm">
+										<h1 class="text-sm text-white font-gothamMedium line-clamp-2">
 											{item.title.english ?? item.title.userPreferred}
 										</h1>
 									</a>
 									<div
-										class="flex items-center p-1 rounded-xl text-sm  h-5 bg-slate-500 opacity-80 text-white"
+										class="flex h-5 items-center rounded-xl bg-slate-500 p-1 text-sm text-white opacity-80"
 									>
 										{item.rating/10}<svg
 											aria-hidden="true"
-											class="w-4 h-4 text-ascend"
+											class="h-4 w-4 text-ascend"
 											fill="currentColor"
 											viewBox="0 0 20 20"
 											xmlns="http://www.w3.org/2000/svg"
@@ -105,8 +105,8 @@
 										>
 									</div>
 								</div>
-								<h1 class="text-sm w-full line-clamp-2">{item.episodeTitle}</h1>
-								<div class="flex justify-between w-full">
+								<h1 class="w-full text-sm line-clamp-2">{item.episodeTitle}</h1>
+								<div class="flex w-full justify-between">
 									<span class="text-ascendSecondary">Episode {item.episodeNumber}</span>
 								</div>
 							</div>
@@ -114,19 +114,19 @@
 					</div>
 				</div>
 			{/each}
-			<div class="flex  w-full justify-between mb-2">
-				<h2 class="text-white font-gothamMedium text-xl">Best Upcomming</h2>
+			<div class="mb-2 flex w-full justify-between">
+				<h2 class="text-xl text-white font-gothamMedium">Best Upcomming</h2>
 				<a
 					data-sveltekit-preload-code="hover"
 					href="javascript:void(0)"
-					class="group flex items-center space-x-1 text-sm font-gotham transition dark:text-slate-400 dark:hover:text-white active:text-slate-400"
+					class="flex items-center text-sm transition group space-x-1 font-gotham active:text-slate-400 dark:text-slate-400 dark:hover:text-white"
 				>
 					<span>See All</span>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						viewBox="0 0 20 20"
 						fill="currentColor"
-						class="w-5 h-5 opacity-50 transition ease-out group-hover:opacity-100 group-active:translate-x-2"
+						class="h-5 w-5  group-active:translate-x-2 opacity-50 transition ease-out group-hover:opacity-100"
 					>
 						<path
 							fill-rule="evenodd"
@@ -137,14 +137,14 @@
 				</a>
 			</div>
 			{#each data.upcoming.results as item}
-				<nav class="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-1 gap-4 lg:gap-8 ">
+				<nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-1 lg:gap-8">
 					<a
 						data-sveltekit-preload-code="hover"
 						href="/info/{item.id}"
-						class="group relative overflow-hidden aspect-w-16 aspect-h-10 bg-black/25 rounded-2xl transition hover:ring-4 hover:ring-orange-500/50 active:opacity-75 active:ring-orange-500/25 mb-2"
+						class="relative mb-2 overflow-hidden rounded-2xl bg-black/25 transition group aspect-w-16 aspect-h-10 hover:ring-4 hover:ring-orange-500/50 active:opacity-75 active:ring-orange-500/25"
 					>
 						<img
-							class="object-cover rounded-2xl h-full opacity-100 transform transition duration-300 ease-out group-hover:scale-105 group-focus:scale-105 group-focus-within:scale-105"
+							class="h-full group-focus-within:scale-105 transform rounded-2xl object-cover opacity-100 transition duration-300 ease-out group-hover:scale-105 group-focus:scale-105"
 							src={item.image}
 							alt="trending anime"
 							loading="lazy"
@@ -156,11 +156,11 @@
 					class="flex items-end justify-between space-x-2 mb-2 border-b border-themeText w-full
 							"
 				>
-					<div class="space-y-1 w-full">
-						<h3 class="text-sm  xl:text-[15px] font-gotham   text-white ">
+					<div class="w-full space-y-1">
+						<h3 class="text-sm text-white font-gotham xl:text-[15px]">
 							{item.title.english || item.title.romaji}
 						</h3>
-						<section class="flex justify-between w-full text-sm font-gothamMedium text-themeText">
+						<section class="flex w-full justify-between text-sm font-gothamMedium text-themeText">
 							<span> Year: {item.releaseDate}</span>
 							<div>status: {item.status}</div>
 						</section>
@@ -172,7 +172,7 @@
 	<!-- END Side Content -->
 
 	<!-- Main Content -->
-	<div class="flex-grow flex flex-col max-w-10xl rounded-3xl  p-4 lg:pl-8 lg:py-4 w-full">
+	<div class="flex w-full flex-grow flex-col rounded-3xl p-4 max-w-10xl lg:py-4 lg:pl-8">
 		<!--
 
       ADD YOUR MAIN CONTENT BELOW
@@ -181,24 +181,24 @@
 
 		<!-- Placeholder -->
 		<div
-			class=" flex flex-auto min-w-full flex-col rounded-3xl bg-primary     border-gray-200 text-gray-400 "
+			class="flex min-w-full flex-auto flex-col rounded-3xl border-gray-200 text-gray-400 bg-primary"
 		>
 			<Slider slide={data.trending.results} />
 
-			<section class="space-y-6 py-6 px-2 text-themeText  w-full  container">
-				<div class="flex items-center justify-between ">
-					<h2 class="text-white font-gothamMedium text-xl">Trending Anime</h2>
+			<section class="container w-full px-2 py-6 space-y-6 text-themeText">
+				<div class="flex items-center justify-between">
+					<h2 class="text-xl text-white font-gothamMedium">Trending Anime</h2>
 					<a
 						data-sveltekit-preload-code="hover"
 						href="javascript:void(0)"
-						class="group flex items-center space-x-1 text-sm font-gotham transition dark:text-slate-400 dark:hover:text-white active:text-slate-400"
+						class="flex items-center text-sm transition group space-x-1 font-gotham active:text-slate-400 dark:text-slate-400 dark:hover:text-white"
 					>
 						<span>See All</span>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 20 20"
 							fill="currentColor"
-							class="w-5 h-5 opacity-50 transition ease-out group-hover:opacity-100 group-active:translate-x-2"
+							class="h-5 w-5 group-active:translate-x-2 opacity-50 transition ease-out group-hover:opacity-100"
 						>
 							<path
 								fill-rule="evenodd"
@@ -208,36 +208,36 @@
 						</svg>
 					</a>
 				</div>
-				<nav class="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 ">
+				<nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
 					<!-- Movie -->
 					<!-- lol -->
 					{#each data.trending.results.slice(0, 3) as card}
 						<a
 							data-sveltekit-preload-code="hover"
 							href="/info/{card.id}"
-							class="group relative  aspect-w-16 overflow-hidden aspect-h-10 bg-black/25 rounded-2xl transition hover:ring-4 hover:ring-orange-500/50 active:opacity-75 active:ring-orange-500/25"
+							class="relative overflow-hidden rounded-2xl bg-black/25 transition group aspect-w-16 aspect-h-10 hover:ring-4 hover:ring-orange-500/50 active:opacity-75 active:ring-orange-500/25"
 						>
 							<img
-								class="object-cover rounded-2xl h-full opacity-100 transform transition duration-300 ease-out group-hover:scale-105 group-focus:scale-105 group-focus-within:scale-105"
+								class="h-full group-focus-within:scale-105 transform rounded-2xl object-cover opacity-100 transition duration-300 ease-out group-hover:scale-105 group-focus:scale-105"
 								src={card.image}
 								alt="trending anime"
 								loading="lazy"
 							/>
 
 							<div
-								class="absolute rounded-[15px] inset-0 flex flex-col justify-between bg-gradient-to-b from-transparent  via-black/60 to-black"
+								class="absolute inset-0 flex flex-col justify-between bg-gradient-to-b from-transparent via-black/60 to-black rounded-[15px]"
 							>
-								<div class="p-4 flex items-end justify-start space-x-2" />
-								<div class="px-4 py-5 flex items-end justify-between space-x-2">
+								<div class="flex items-end justify-start p-4 space-x-2" />
+								<div class="flex items-end justify-between px-4 py-5 space-x-2">
 									<div class="space-y-1">
-										<h3 class="text-sm  xl:text-[15px] font-gotham   text-white w-[99%]">
+										<h3 class="text-sm text-white font-gotham w-[99%] xl:text-[15px]">
 											{card.title.english}
 										</h3>
-										<section class="text-sm font-gothamMedium w-max text-themeText">
+										<section class="w-max text-sm font-gothamMedium text-themeText">
 											{card.releaseDate}
 											{#each card.genres.slice(0, 3) as genre}
 												<div
-													class="font-semibold inline-flex px-2 py-[1px] leading-4 text-xs rounded text-ascend ml-2 bg-secondary"
+													class="ml-2 inline-flex rounded px-2 text-xs font-semibold leading-4 py-[1px] text-ascend bg-secondary"
 												>
 													{genre}
 												</div>
@@ -252,7 +252,7 @@
 											xmlns="http://www.w3.org/2000/svg"
 											viewBox="0 0 20 20"
 											fill="#007CFA"
-											class="hi-mini hi-play w-5 h-5 translate-x-0.5"
+											class="h-5 w-5 hi-mini hi-play translate-x-0.5"
 										>
 											<path
 												d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"
@@ -266,26 +266,26 @@
 					{/each}
 				</nav>
 			</section>
-			<section class="space-y-6 py-4 px-2 text-white  container">
-				<nav class="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-20 ">
+			<section class="container px-2 py-4 text-white space-y-6">
+				<nav class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-2 lg:gap-20">
 					<div
-						class="bg-secondary flex flex-col text-2xl font-gotham overflow-clip bg-black/25 rounded-[40px] p-4 gap-2"
+						class="flex flex-col gap-2 overflow-clip bg-black/25 p-4 text-2xl bg-secondary font-gotham rounded-[40px]"
 					>
-						<div class="h-16  flex  justify-between  mx-auto dark:text-white">Most Popular</div>
+						<div class="mx-auto flex h-16 justify-between dark:text-white">Most Popular</div>
 						{#each data.popular.results.slice(3, 8) as item}
 							<div class="t">
-								<div class=" px-5  flex mb-2 ">
-									<div class="min-w-30 h-32 ">
+								<div class="mb-2 flex px-5">
+									<div class="h-32 min-w-30">
 										<a data-sveltekit-preload-data="hover" class="" href="/info/{item.id}">
-											<img src={item.image} alt="" loading="lazy" class="min-w-30 h-32" />
+											<img src={item.image} alt="" loading="lazy" class="h-32 min-w-30" />
 										</a>
 									</div>
 									<div class="mx-2 flex flex-col justify-between">
 										<div class="top-part">
 											<div
-												class="font-gothamMedium text-sm lg:text-sm hover:text-gray-400  line-clamp-1"
+												class="text-sm font-gothamMedium line-clamp-1 hover:text-gray-400 lg:text-sm"
 											>
-												<a data-sveltekit-preload-data="hover" href="/info/{item.id}" class="  "
+												<a data-sveltekit-preload-data="hover" href="/info/{item.id}" class=""
 													>{item.title.english}</a
 												>
 											</div>
@@ -293,7 +293,7 @@
 												{item.rating / 10}
 												<svg
 													aria-hidden="true"
-													class="w-7 h-7 text-ascend"
+													class="h-7 w-7 text-ascend"
 													fill="currentColor"
 													viewBox="0 0 20 20"
 													xmlns="http://www.w3.org/2000/svg"
@@ -305,35 +305,35 @@
 												<!-- <p class="ml-2 text-sm font-bold text-gray-100">{parseInt(item.mappings.kitsu.attributes.averageRating)}%</p> -->
 											</div>
 										</div>
-										<div id="under-section " class="text-sm  text-gray-300 flex gap-2">
+										<div id="under-section " class="flex gap-2 text-sm text-gray-300">
 											<span>{item.duration} min</span><span>{item.totalEpisodes} Ep</span><span
 												>{item.status}</span
 											>
 										</div>
 									</div>
 								</div>
-								<div class="border-b-[0.5px] relative mx-auto w-[615px] m-2 border-gray-700" />
+								<div class="relative m-2 mx-auto border-gray-700 border-b-[0.5px] w-[615px]" />
 							</div>
 						{/each}
 					</div>
 					<div
-						class="bg-secondary flex flex-col  text-2xl font-gotham overflow-clip bg-black/25 rounded-[40px] p-4 gap-2"
+						class="flex flex-col gap-2 overflow-clip bg-black/25 p-4 text-2xl bg-secondary font-gotham rounded-[40px]"
 					>
-						<div class="h-16  flex justify-center    dark:text-white">Top Airing</div>
+						<div class="flex h-16 justify-center dark:text-white">Top Airing</div>
 						{#each data.trending.results.slice(3, 8) as item}
 							<div class="t">
-								<div class=" px-5  flex mb-2 ">
-									<div class="min-w-30 h-32">
+								<div class="mb-2 flex px-5">
+									<div class="h-32 min-w-30">
 										<a data-sveltekit-preload-data="hover" class="" href="/info/{item.id}">
-											<img src={item.image} alt="" loading="lazy" class="min-w-30 h-32" />
+											<img src={item.image} alt="" loading="lazy" class="h-32 min-w-30" />
 										</a>
 									</div>
 									<div class="mx-2 flex flex-col justify-between">
 										<div class="top-part">
 											<div
-												class="font-gothamMedium text-sm lg:text-sm hover:text-gray-400  line-clamp-1"
+												class="text-sm font-gothamMedium line-clamp-1 hover:text-gray-400 lg:text-sm"
 											>
-												<a data-sveltekit-preload-data="hover" href="/info/{item.id}" class="  "
+												<a data-sveltekit-preload-data="hover" href="/info/{item.id}" class=""
 													>{item.title.english ?? item.title.userPreferred}</a
 												>
 											</div>
@@ -341,7 +341,7 @@
 												{item.rating / 10}
 												<svg
 													aria-hidden="true"
-													class="w-7 h-7 text-ascend"
+													class="h-7 w-7 text-ascend"
 													fill="currentColor"
 													viewBox="0 0 20 20"
 													xmlns="http://www.w3.org/2000/svg"
@@ -353,14 +353,14 @@
 												<!-- <p class="ml-2 text-sm font-bold text-gray-100">{parseInt(item.mappings.kitsu.attributes.averageRating)}%</p> -->
 											</div>
 										</div>
-										<div id="under-section " class="text-sm  text-gray-300 flex gap-2">
+										<div id="under-section " class="flex gap-2 text-sm text-gray-300">
 											<span>{item.duration} min</span><span>{item.totalEpisodes} Ep</span><span
 												>{item.status}</span
 											>
 										</div>
 									</div>
 								</div>
-								<div class="border-b-[0.5px] relative mx-auto w-[615px] m-2 border-gray-700" />
+								<div class="relative m-2 mx-auto border-gray-700 border-b-[0.5px] w-[615px]" />
 							</div>
 						{/each}
 					</div>
@@ -380,13 +380,13 @@
 
 <!-- Page Footer -->
 <!-- <footer id="page-footer" class="flex flex-none items-center bg-white">
-    <div class="text-center flex flex-col md:text-left md:flex-row md:justify-between text-sm max-w-10xl mx-auto px-4 lg:px-8 w-full">
+    <div class="mx-auto flex w-full flex-col px-4 text-center text-sm max-w-10xl md:flex-row md:justify-between md:text-left lg:px-8">
       <div class="pt-4 pb-1 md:pb-4">
         <a href="https://tailkit.com" target="_blank" class="font-medium text-rose-600 hover:text-rose-400">Tailkit</a> ©
       </div>
-      <div class="pb-4 pt-1 md:pt-4 inline-flex items-center justify-center">
+      <div class="inline-flex items-center justify-center pt-1 pb-4 md:pt-4">
         <span>Crafted with</span>
-        <svg class="hi-solid hi-heart inline-block w-4 h-4 mx-1 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg>
+        <svg class="mx-1 inline-block h-4 w-4 text-red-600 hi-solid hi-heart" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg>
         <span>by <a href="https://pixelcave.com" target="_blank" class="font-medium text-rose-600 hover:text-rose-400">pixelcave</a></span>
       </div>
     </div>

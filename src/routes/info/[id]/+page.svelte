@@ -83,7 +83,7 @@
 			<div class="py-3 flex flex-col justify-between">
 				<div class="flex flex-col gap-2">
 					<h1 class="text-white text-3xl font-gothamBook">
-						{info?.title?.english ?? info.title.romaji}
+						{info?.title?.english ?? info?.title?.romaji}
 					</h1>
 					<ul class="flex gap-1 ">
 						{#each info.genres as genre}
