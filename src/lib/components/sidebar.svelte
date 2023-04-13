@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { state } from '../../stores';
 let Sidebar = false;
-	const toggleSidebar = () => {
-		state.update((n) => !n);
-		Sidebar = !Sidebar;
-	};
+	
 	
 </script>
 
@@ -35,7 +32,10 @@ let Sidebar = false;
 				/>
 				<span class="font-gothamBold text-lg" class:hidden={!$state}>Anifox </span>
 			</a>
-			<button class="p-2 flex justify-center items-center my-auto transition ease-out duration-500  " class:w-full={!$state} on:click={toggleSidebar } class:rotate-180={Sidebar} class:mx-auto={!$state} >
+			<button class="p-2 flex justify-center items-center my-auto transition ease-out duration-500  " class:w-full={!$state} on:click={() => {
+				$state = !$state;
+				Sidebar = !Sidebar;
+			}} class:rotate-180={Sidebar} class:mx-auto={!$state} >
 				
 				<svg
 				class="hi-mini hi-chevron-left inline-block w-5 h-5"

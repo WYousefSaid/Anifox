@@ -19,7 +19,7 @@ export const GET: RequestHandler = async ({ url, fetch, setHeaders }) => {
 			console.log('Cached data not found for popular anime');
 
 			const response = await fetch(
-				`https://api.consumet.org/meta/anilist/popular?page=${page}&perPage=${perPage}`
+				`https://consument-six.vercel.app/meta/anilist/popular?page=${page}&perPage=${perPage}`
 			);
 			const data = await response.json();
 			redis.set('popular', JSON.stringify(data), 'EX', 60 * 60 * 24); // 1 day cache

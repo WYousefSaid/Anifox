@@ -15,7 +15,7 @@ export const GET: RequestHandler = async ({ url, fetch, setHeaders }) => {
 			console.log('Cached data not found for upcoming animes');
 
 			const response = await fetch(
-				`https://api.consumet.org/meta/anilist/advanced-search?status=NOT_YET_RELEASED&sort=["POPULARITY_DESC","SCORE_DESC"]&perPage=4`
+				`https://consument-six.vercel.app/meta/anilist/advanced-search?status=NOT_YET_RELEASED&sort=["POPULARITY_DESC","SCORE_DESC"]&perPage=4`
 			);
 			const data = await response.json();
 			redis.set('upcoming', JSON.stringify(data), 'EX', 60 * 60 * 24); // 1 day cache

@@ -5,9 +5,7 @@
 	$: data;
 	$: ({ info } = data);
 	let trailer = false;
-	function playTrailer() {
-		trailer = true;
-	}
+	
 </script>
 
 <section>
@@ -34,7 +32,9 @@
 				/>
 				<div class="absolute bottom-10 left-[43%] ">
 					<button
-						on:click={playTrailer}
+						on:click={() => {
+							trailer = true;
+						}}
 						class="text-white font-gothamBold  py-2 px-12 border-[1.9px] border-ascend rounded-xl backdrop-blur-sm flex  backdrop-brightness-125 hover:backdrop-brightness-150 focus:ring-1 focus:ring-ascend gap-2 justify-center items-center"
 						><svg
 							class="hi-mini fill-ascend hi-play inline-block w-3 h-3"

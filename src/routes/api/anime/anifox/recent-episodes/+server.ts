@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Main } from '$lib/types';
-import { redis} from '$lib/server/redis';
+import { redis } from '$lib/server/redis';
 // FIXME: look into how to cache this data properly
 export const GET: RequestHandler = async ({ url, fetch, setHeaders }) => {
 	try {
@@ -16,7 +16,7 @@ export const GET: RequestHandler = async ({ url, fetch, setHeaders }) => {
 			console.log('Cached data not found for recent episodes');
 
 			const response = await fetch(
-				`https://api.consumet.org/meta/anilist/recent-episodes?page=${page}&provider=zoro&perPage=40`
+				`https://consument-six.vercel.app/meta/anilist/recent-episodes?page=${page}&provider=zoro&perPage=40`
 			);
 			const data = await response.json();
 			redis.set(`recent:${page}`, JSON.stringify(data), 'EX', 60 * 60 * 3); // 1 day cache

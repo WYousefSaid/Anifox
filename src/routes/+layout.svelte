@@ -1,20 +1,25 @@
 <script lang="ts">
 	import '../app.css';
 	import { state } from '../stores';
-	import type { Data } from '$lib/types';
+	import type { Info } from '$lib/types';
+	import { fly } from 'svelte/transition'
 	import { clickOutside } from '$lib/outside.js';
 	import Sidebar from '$lib/components/sidebar.svelte';
-
+	import { slide } from 'svelte/transition';
+	import { tweened } from 'svelte/motion';
+	import { cubicOut,cubicIn} from 'svelte/easing';
+	import { beforeNavigate, afterNavigate } from '$app/navigation';
 	$: $state = $state;
 	let value = '';
+	export let data
 	let inputElement: HTMLInputElement;
 	let showSearching = false;
 	let isResults = false;
 	let queryTimeoutId: any;
 	$: value;
 	$: onQueryChange(value);
-	let data: Data[] = [];
-	$: data;
+	let info: Info[] = [];
+	$: info;
 	// WOW
 	function onQueryChange(query: string) {
 		if (query.length >= 3) {
@@ -32,15 +37,37 @@
 		try {
 			const response = await fetch('/api/anime/anifox/search?query=' + query);
 			let res = await response.json();
-			data = res.results;
+			info = res.results;
 			isResults = true;
 		} catch (error) {
-			console.error('Error fetching data from API:', error);
+			console.error('Error fetching info from API:', error);
 		}
 	}
+	let isLoading = false;
+	const progress = tweened(0, {
+		duration: 600,
+		easing: cubicOut
+	});
+	// beforenavigate set isLoading to true and progress to 50
+	beforeNavigate(() => {
+		isLoading = true;
+		progress.set(85);
+	});
+  afterNavigate(() => {
+		isLoading = false;
+		progress.set(0);
+	});
+	const duration = 300
+  const delay = duration + 100
+  const y = 10
 
+  const transitionIn = { easing: cubicOut, y, duration, delay }
+  const transitionOut = { easing: cubicIn, y: -y, duration }
 </script>
+{#if isLoading}
+<progress max="100" class="z-100 items-center h-1  bg-pink-100 rounded-full overflow-hidden dark:bg-pink-950  top-0 w-full fixed block " value="{$progress || 0}" />
 
+{/if}
 <!-- Page Container -->
 <Sidebar />
 <div
@@ -51,12 +78,12 @@
 >
 	<header
 		id="page-header"
-		class="flex flex-none justify-between items-center h-16 bg-primary shadow-sm  pl-10 font-gothamBook"
+		class="flex flex-none justify-between items-center h-16 bg-primary shadow-sm pl-10 font-gothamBook"
 	>
 		<div class="nav flex gap-2 min-w-max font-gothamBook text-lg">
 			<a
 				href="#"
-				class="text-themeText transition group focus:text-ascend hover:text-ascend transition duration-300 "
+				class="text-themeText transition group focus:text-ascend hover:text-ascend transition duration-300"
 			>
 				<span>Home</span>
 				<span
@@ -65,7 +92,7 @@
 			</a>
 			<a
 				href="#"
-				class="text-themeText transition group focus:text-ascend hover:text-ascend transition duration-300 "
+				class="text-themeText transition group focus:text-ascend hover:text-ascend transition duration-300"
 			>
 				<span>Movies</span>
 				<span
@@ -74,7 +101,7 @@
 			</a>
 			<a
 				href="#"
-				class="text-themeText transition group focus:text-ascend hover:text-ascend transition duration-300 "
+				class="text-themeText transition group focus:text-ascend hover:text-ascend transition duration-300"
 			>
 				<span>New Releases</span>
 				<span
@@ -83,7 +110,7 @@
 			</a>
 			<a
 				href="#"
-				class="text-themeText transition group focus:text-ascend hover:text-ascend transition duration-300 "
+				class="text-themeText transition group focus:text-ascend hover:text-ascend transition duration-300"
 			>
 				<span>Community</span>
 				<span
@@ -92,8 +119,8 @@
 			</a>
 		</div>
 		<div class="mr-4 flex gap-8">
-			<div class="flex items-center justify-center ">
-				<div class="flex relative ">
+			<div class="flex items-center justify-center">
+				<div class="flex relative">
 					<input
 						type="text"
 						on:click={() => {
@@ -103,13 +130,13 @@
 						on:input={() => {
 							value = inputElement.value;
 						}}
-						class="px-4 bg-secondary rounded-r-sm text-themeText  focus:outline-none focus:border-none focus:ring-1 focus:ring-ascend rounded-l-md py-2 w-80"
+						class="px-4 bg-secondary rounded-r-sm text-themeText focus:outline-none focus:border-none focus:ring-1 focus:ring-ascend rounded-l-md py-2 w-80"
 						placeholder="Search..."
 					/>
-					<div class="relative ">
-						<div class="absolute inset-0 bg-ascend blur " />
+					<div class="relative">
+						<div class="absolute inset-0 bg-ascend blur" />
 						<button
-							class="flex relative items-center h-full  justify-center px-4 rounded-r-md bg-ascend shadow-xl"
+							class="flex relative items-center h-full justify-center px-4 rounded-r-md bg-ascend shadow-xl"
 						>
 							<svg
 								class="w-6 h-6 text-slate-200"
@@ -123,53 +150,55 @@
 							</svg>
 						</button>
 					</div>
-					{#if showSearching && isResults && data.length > 0}
-						<div
-							class="w-full absolute rounded-b-md bottom--10 mt-11 z-100  bg-secondary border-[0.5px] border-secondary "
-							use:clickOutside
-							on:outclick={() => {
-								showSearching = false;
-							}}
-						>
-							<ul class="font-gotham ">
-								{#each data.slice(0, 4) as item}
-									<a href="/info/{item.id}" class="">
-										<li class="w-full flex h-24 hover:bg-themeTextSecondary/25 border-ascend">
-											<img
-												class="p-2 w-20 object-cover"
-												src={item.image}
-												alt="anime poster"
-												srcset=""
-											/>
-											<div class="info  w-full flex flex-col justify-between p-2">
-												<h1 class="text-slate-200 font-gothamMedium line-clamp-1 text-sm">
-													{item.title.userPreferred ?? item.title.romaji}
-												</h1>
-												<h1 class="text-slate-400 text-xs">{item.title.english}</h1>
-												<div class="w-full">
-													<ul class="flex gap-2 w-full  items-center text-slate-500 text-xs">
-														<li>{item.totalEpisodes} Ep</li>
-														<i class="dot w-1 h-1 rounded-full bg-themeText" />
+					{#if showSearching && isResults && info.length > 0}
+						{#key info}
+							<div
+								class="w-full absolute rounded-b-md bottom--10 mt-11 z-100 bg-secondary border-[0.5px] border-secondary"
+								use:clickOutside
+								on:outclick={() => {
+									showSearching = false;
+								}}
+							>
+								<ul transition:slide class="font-gotham">
+									{#each info.slice(0, 4) as item, i}
+										<a href="/info/{item.id}" class="">
+											<li class="w-full flex h-24 hover:bg-themeTextSecondary/25 border-ascend">
+												<img
+													class="p-2 w-20 object-cover"
+													src={item.image}
+													alt="anime poster"
+													srcset=""
+												/>
+												<div class="info w-full flex flex-col justify-between p-2">
+													<h1 class="text-slate-200 font-gothamMedium line-clamp-1 text-sm">
+														{item.title.userPreferred ?? item.title.romaji}
+													</h1>
+													<h1 class="text-slate-400 text-xs">{item.title.english}</h1>
+													<div class="w-full">
+														<ul class="flex gap-2 w-full items-center text-slate-500 text-xs">
+															<li>{item.totalEpisodes} Ep</li>
+															<i class="dot w-1 h-1 rounded-full bg-themeText" />
 
-														<li class="text-ascendSecondary">{item.type}</li>
-														<i class="dot w-1 h-1 rounded-full bg-themeText" />
+															<li class="text-ascendSecondary">{item.type}</li>
+															<i class="dot w-1 h-1 rounded-full bg-themeText" />
 
-														<li>{item.releaseDate}</li>
-													</ul>
+															<li>{item.releaseDate}</li>
+														</ul>
+													</div>
 												</div>
-											</div>
-										</li>
-										<div class="relative">
-											<div
-												class=" absolute inset-0 blur border-[0.2px] border-solid border-slate-400 w-full"
-											/>
+											</li>
+											<div class="relative">
+												<div
+													class=" absolute inset-0 blur border-[0.2px] border-solid border-slate-400 w-full"
+												/>
 
-											<div class="border-[0.2px] border-solid border-slate-600 w-full" />
-										</div>
-									</a>
-								{/each}
-							</ul>
-						</div>
+												<div class="border-[0.2px] border-solid border-slate-600 w-full" />
+											</div>
+										</a>
+									{/each}
+								</ul>
+							</div>
+						{/key}
 					{/if}
 				</div>
 			</div>
@@ -199,6 +228,15 @@
 		</div>
 	</header>
 	<!-- END Page Header -->
-
+	{#key data.pathname}
+	<div
+	in:fly={transitionIn}
+	out:fly={transitionOut}
+>
 	<slot />
+	</div>
+	{/key}
 </div>
+<style>
+	
+</style>

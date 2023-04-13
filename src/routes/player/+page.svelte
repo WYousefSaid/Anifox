@@ -23,6 +23,7 @@ import artplayerPluginHlsQuality from 'artplayer-plugin-hls-quality';
 
 		var art = new Artplayer({
 			container: '.artplayer-app',
+			
 			url: 'https://proxy.vnxservers.com/proxy/m3u8/https%3A%2F%2Fc-an-ca3.betterstream.cc%3A2223%2Fhls-playback%2F71f87b4028d27b3ba749bd2029f3248245618a740ca81a9a9863f257784436f85c939482f4d306945639b935dc612f231ee72e78b82b585d5f189390bf7b768ef9a446f832c8d9520ed37824c2a37cd9caa695ca5490a5642fb7394341e61667a04edbc87a32a68cf488f6842828941fa71e9694cae6a61ec7a0d3fb659047c7851cc867d2bb906842f492eaf618e8c4%2Fmaster.m3u8',
 			theme: '#23ade5',
 			type: 'm3u8',
@@ -68,7 +69,7 @@ import artplayerPluginHlsQuality from 'artplayer-plugin-hls-quality';
         },
     },
 			customType: {
-				m3u8: playM3u8
+				m3u8: playM3u8,
 			}
 		});
 

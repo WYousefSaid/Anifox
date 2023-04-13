@@ -1,9 +1,9 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-
 	export let data: PageData;
 </script>
-<div class="flex gap-4">
+<Loader />
+<!-- <div class="flex gap-4">
 <div class="relative h-52 w-44" >
   <div class="relative overflow-hidden rounded-lg">
     <div class="absolute inset-0 bg-gradient-to-t from-zinc-800 to-transparent"></div>
@@ -38,4 +38,4 @@
   </div>
 </div>
 
-</div>
+</div> -->
